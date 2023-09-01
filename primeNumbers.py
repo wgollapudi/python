@@ -25,7 +25,7 @@ def isPrime(num: int) -> bool:
     return False if (0 in map(lambda p: num%p, primes)) else True
 
 def main() -> None:
-    print(generatePrimesUntil(100))
+    pass
 
 if __name__ == '__main__':
     main()
