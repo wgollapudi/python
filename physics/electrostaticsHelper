@@ -1,0 +1,64 @@
+from dataclasses import dataclass
+
+@dataclass
+class pointCharge():
+    xPos: float = 0
+    yPos: float = 0
+    zPos: float = 0
+    charge: float = 0
+
+    def __post_init__(self) -> None:
+        self.e = 1.6 * 10**-19
+        self.pi = 3.14159265358979323846
+        self.epsilon0 = 8.854187817 * 10**-12
+        self.debug = False
+
+    def getPosition(self) -> [int]:
+        return [self.xPos,self.yPos,self.zPos]
+    
+    def calcElectricField(self, x1: float, y1: float, z1: float) -> (float, float, float):
+        r = (x1-self.xPos, y1-self.yPos, z1-self.zPos)
+        magR = (sum(map(lambda i: i**2, r)))**(1/2)
+        rHat = tuple(map(lambda i: i/magR, r))
+        magEF = (1/(4*self.pi*self.epsilon0))*(self.charge/(magR)**2)
+        electricField = tuple(map(lambda i: i*magEF, rHat))
+        if self.debug:
+            print(f"{rHat=}")
+            print(f"{magR=}")
+            print(f"{magEF=}")
+        return electricField
+
+@dataclass
+class proton(pointCharge):
+    def __post_init__(self) -> None:
+        super.__post_init__()
+        charge = 1.6 * 10**-19
+
+@dataclass
+class electron(pointCharge):
+    def __post_init__(self) -> None:
+        super.__post_init__()
+        charge = -1.6 * 10**-19
+
+class electricField():
+    def __init__(self, *particles):
+        self.particles = list(particles)
+    
+    def getParticles(self) -> [pointCharge]:
+        return self.particles
+    
+    def calcElectricFeild(self, x1, y1, z1) -> (float, float, float):
+        fields = []
+        for particle in self.particles:
+            fields.append(particle.calcElectricField())
+
+
+def main():
+    q1 = pointCharge(xPos = 0.4, yPos = 0, zPos = 0, charge=3*10*-8)
+    q1.debug = False
+    print(q1.calcElectricField(0,0.03,0))
+
+if __name__ == '__main__':
+    main()
+    
+
