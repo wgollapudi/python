@@ -41,22 +41,42 @@ class electron(pointCharge):
         charge = -1.6 * 10**-19
 
 class electricField():
-    def __init__(self, *particles):
+    def __init__(self, *particles: pointCharge):
         self.particles = list(particles)
     
     def getParticles(self) -> [pointCharge]:
         return self.particles
     
-    def calcElectricFeild(self, x1, y1, z1) -> (float, float, float):
-        fields = []
+    def getParticlesLoc(self) -> [list]:
+        locList = []
         for particle in self.particles:
-            fields.append(particle.calcElectricField())
+            locList.append(particle.getPosition())
+        
+        return locList
+    
+    def addParticle(self, particle: pointCharge) -> None:
+        self.particles.append(particle)
+    
+    def calcElectricFeild(self, x1, y1, z1) -> (float, float, float):
+        fields = (0,0,0)
+        for particle in self.particles:
+            fields = tuple(map(lambda x,y: x+y, fields, particle.calcElectricField(x1, y1, z1)))
+
+        return fields
+        
 
 
 def main():
-    q1 = pointCharge(xPos = 0.4, yPos = 0, zPos = 0, charge=3*10*-8)
-    q1.debug = False
-    print(q1.calcElectricField(0,0.03,0))
+    rodLength = 2
+    numRodSegments = 6
+    totalCharge = 3*10**-8
+    E1 = electricField()
+    for num in range(numRodSegments):
+        q = pointCharge(-rodLength/2 + num*(rodLength/(numRodSegments-1)), 0, 0, totalCharge/numRodSegments)
+        E1.addParticle(q)
+
+    print(E1.getParticlesLoc())
+    print(E1.calcElectricFeild(0.3, 0.4, 0))
 
 if __name__ == '__main__':
     main()

@@ -1,0 +1,1 @@
+time.struct_time(tm_year=2023, tm_mon=9, tm_mday=12, tm_hour=15, tm_min=5, tm_sec=20, tm_wday=1, tm_yday=255, tm_isdst=1): L1A,L1F,L1L,L2A,L2F,L2L,M1A,M1F,M1L,M2A,M2F,M2L,S1A,S1F,S1L,S2A,S2F,S2L,N1A,N1F,N1L,N2A,N2F,N2L,/n

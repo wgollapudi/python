@@ -1,0 +1,29 @@
+import time
+def convoluteLists(l1, l2):
+    output = []
+    for i in l1:
+        for j in l2:
+            output.append(str(i)+str(j))
+
+    return output
+
+def genSampleSpace(*dimensions):
+    sampleSpace = dimensions[0]
+    for dim in dimensions[1:]:
+        sampleSpace = convoluteLists(sampleSpace, dim)
+
+    return sampleSpace
+
+def main():
+    l1 = ['L', 'M', 'S', 'N']
+    l2 = [1, 2]
+    l3 = ['A', 'F', 'L']
+    space = genSampleSpace(l1,l2,l3)
+    formattedOutput = ""
+    for i in space:
+        formattedOutput+=(i+",")
+    with open('stat35000Scripts/output.txt', 'a') as outputFile:
+        outputFile.write(f"{time.localtime()}: {formattedOutput}/n")
+
+if __name__ == '__main__':
+    main()
