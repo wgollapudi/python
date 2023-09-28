@@ -23,7 +23,7 @@ def main():
     for i in space:
         formattedOutput+=(i+",")
     with open('stat35000Scripts/output.txt', 'a') as outputFile:
-        outputFile.write(f"{time.localtime()}: {formattedOutput}/n")
+        outputFile.write(f"{time.localtime()}: {formattedOutput}\n")
 
 if __name__ == '__main__':
     main()

@@ -64,8 +64,6 @@ class electricField():
 
         return fields
         
-
-
 def main():
     rodLength = 2
     numRodSegments = 6
@@ -80,5 +78,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
-
