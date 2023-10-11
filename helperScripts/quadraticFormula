@@ -1,0 +1,22 @@
+def quadraticHelper(a, b, c) -> (int):
+    axisOfSymmetry = -b/(2*a)
+    vertex = (axisOfSymmetry, a*(axisOfSymmetry**2) + b*(axisOfSymmetry) + c)
+    zero1 = axisOfSymmetry + (b**2 + 4*a*c)/(2*a)
+    zero2 = axisOfSymmetry - (b**2 + 4*a*c)/(2*a)
+    sign = a%1
+    return axisOfSymmetry, zero1, zero2, vertex, sign
+
+print("Use this script to find the 0s of a quadratic funtion (using the quadratic formula): ")
+print("The quadratic formula is of the form Ax^2 + Bx + C = 0, simplify your function to this form.")
+print("Input your variables")
+a = int(input("Enter A: "))
+b = int(input("Enter B: "))
+c = int(input("Enter C: "))
+
+axisOfSymmetry, zero1, zero2, vertex, sign = quadraticHelper(a,b,c)
+print(f"The equation you entered is {a}x^2 + {b}x + {c}")
+print(f"-- For this equation --")
+print(f"Your axis of symmetry is around y = {axisOfSymmetry}")
+print(f"Your zeros are {zero1} and {zero2}")
+print(f"The vertex is at ({vertex[0]},{vertex[1]})")
+print(f"The vertex is the {'maximum' if sign == -1 else 'minimum'}")
